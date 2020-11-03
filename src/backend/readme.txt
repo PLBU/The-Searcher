@@ -1,1 +1,0 @@
-Ini ntar taro kode js kalian d sini yaa, txt ini ntar d delete aja
