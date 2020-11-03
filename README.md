@@ -7,6 +7,14 @@
 * [@FarrelAbiezaZidan](https://github.com/FarraArbitera) - 13519182
 * [@LeonardusJamesWang](https://github.com/jamesclaws) - 13519189
 
+## Technologies Used
+* React.js
+* Node.js
+* Express
+* Cors
+* Axios
+* And other libraries
+
 ## Prerequisites
 * Installed Node.js https://nodejs.org/en/download/
 
@@ -15,7 +23,7 @@
   ```
     npm install
   ```
-* Running the website in http://localhost:3000/
+* Running the website in http://localhost:3000/ and server in http://localhost:5000/
   ```
     npm start
   ```
