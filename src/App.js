@@ -12,7 +12,7 @@ import Nav from './components/Nav'
 // importing styling
 import './assets/css/App.css'
 
-export default () => {
+const App = () => {
   return (
       <Router>
         <Nav/>
@@ -26,3 +26,5 @@ export default () => {
       </Router>
   )
 }
+
+export default App
