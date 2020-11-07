@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const How = () => {
     return (
-        <div>
+        <div className='flex h-screen justify-center items-center'>
             <h1>How to use</h1>
         </div>
     )

@@ -2,8 +2,8 @@ import * as React from 'react'
 
 const AboutUs = () => {
     return (
-        <div>
-            <h1>About us</h1>
+        <div className='flex h-screen justify-center items-center'>
+            <h1>About Us</h1>
         </div>
     )
 }

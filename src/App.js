@@ -10,19 +10,17 @@ import AboutUs from './pages/aboutus'
 import Nav from './components/Nav'
 
 // importing styling
-import './assets/css/App.css'
+import './css/main.css'
 
 const App = () => {
   return (
       <Router>
         <Nav/>
-        <div className="header">
-          <Switch>
-              <Route path="/" exact component={Home} />
-              <Route path="/how" component={How} />
-              <Route path="/about-us" component={AboutUs} />
-            </Switch>
-        </div>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/how" component={How} />
+          <Route path="/about-us" component={AboutUs} />
+        </Switch>
       </Router>
   )
 }
