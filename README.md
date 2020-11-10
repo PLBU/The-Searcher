@@ -1,5 +1,5 @@
 # The Seacher
-![Current Version](https://img.shields.io/badge/version-v0.2.0-blue)
+![Current Version](https://img.shields.io/badge/version-v0.4.0-blue)
 > This project is built for university assignment, it's a search engine for personal documents on website platform
 
 ## Created by:
