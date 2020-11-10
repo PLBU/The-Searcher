@@ -25,6 +25,9 @@ const Nav = () => {
                     <Link to='/how' className="transition transform duration-500 ease-in-out block text-lg mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-teal-500 hover:font-bold mr-5 float-right">
                         How to Use
                     </Link>
+                    <Link to='/upload' className="transition transform duration-500 ease-in-out block text-lg mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-teal-500 hover:font-bold mr-5 float-right">
+                        Upload
+                    </Link>
                 </div>
             </div>
         </nav>

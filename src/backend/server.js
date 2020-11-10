@@ -3,18 +3,11 @@ const express = require('express')
 const fs = require('fs')
 const lancasterStemmer = require('lancaster-stemmer')
 const cors = require('cors')
+const formidable = require('formidable');
 
 //Constants
 const server = express()
 const port = 5000
-
-//Enabling all CORS Requests
-server.use(cors() )
-
-//Starting the server
-server.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`)
-})
 
 //Endpoints Example
 //Variable" global
@@ -48,21 +41,15 @@ var nama2files = ["contoh.txt", "contoh2.txt", "contoh3.txt", "contoh4.txt", "ba
 var sudahMasukMatriks = 0;
 
 //Program utama
-bacaSemuaFile();
-
-function bacaSemuaFile()
-{
+const bacaSemuaFile = async () => {
 	//Awal Program, memanggil readTxt yang bertugas untuk membaca file
 	// *File dibaca di proses di waktu yang berbeda-beda, urutan dokumen dataMatriks tidak sesuai urutan nama2files*
 	for (var i = 0; i < nama2files.length; i++) {
-		readTxt(nama2files[i]);
+		await readTxt(nama2files[i]);
 	}
-
-	//Menunggu 3 detik untuk mengecek bila matriks siap
-	setTimeout(checkMatriksSiap,3000);
 }
 
-function checkMatriksSiap()
+async function checkMatriksSiap()
 {
 	if (sudahMasukMatriks == nama2files.length) 
 	{
@@ -80,7 +67,7 @@ function checkMatriksSiap()
 }
 
 
-function readTxt(namaFile)
+async function readTxt(namaFile)
 {
 	// Terima nama file, cari di folder doc, lalu simpan di docstring,
 	// remove stopword dan stemming, simpan di docArray
@@ -153,3 +140,35 @@ function masukTabel(arr, brsMatriks)
 		}
 	}
 }
+
+//Enabling all CORS Requests
+server.use(cors() )
+
+//Starting the server
+server.listen(port, async () => {
+  	console.log(`Server listening at http://localhost:${port}`)
+	await bacaSemuaFile()
+	await checkMatriksSiap()
+})
+
+//Endpoints
+server.get('/txt', (req, res) => {
+    res.send(dataMatriks)
+})
+
+//To upload file
+server.post('/upload', (req, res) => {
+	try {
+		var form = new formidable.IncomingForm();
+		form.parse(req, function (err, fields, files) {
+			var oldpath = files.filetoupload.path;
+			var newpath = '../../doc/' + files.filetoupload.name;
+			fs.rename(oldpath, newpath, function (err) {
+				if (err) throw err
+				res.send('File uploaded and moved!')
+			})
+		})
+	} catch (e) {
+		throw e
+	}
+})
