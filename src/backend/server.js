@@ -160,7 +160,7 @@ server.listen(port, async () => {
 	await checkMatriksSiap()
 })
 
-//Endpoints
+//Endpoints test
 server.get('/txt', (req, res) => {
     res.send(dataMatriks)
 })
@@ -174,6 +174,7 @@ server.post('/upload', (req, res) => {
 			var newpath = '../../doc/' + files.filetoupload.name;
 			fs.rename(oldpath, newpath, function (err) {
 				if (err) throw err
+				bacaSemuaFile()
 				res.send('File uploaded and moved!')
 			})
 		})
