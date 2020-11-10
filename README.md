@@ -31,8 +31,8 @@
 ## To Do List Frontend
 - [x] Buat Navigation Structure
 - [x] Buat desain kasar Frontend
-- [ ] Isi About Us
-- [ ] Isi How to Use
+- [x] Isi About Us
+- [x] Isi How to Use
 - [x] Buat Search Bar
 - [ ] State2 sesuain backend / Logic Frontend
-- [ ] Mulai styling, kemungkinan Tailwind.css ato React Bootstrap
+- [x] Mulai styling, kemungkinan Tailwind.css ato React Bootstrap
