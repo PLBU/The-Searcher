@@ -1,0 +1,17 @@
+# PROGRAM Priority Queue
+
+# KAMUS
+NMax: integer
+
+type Queue: <
+    Isi: array of [0..NMax-1],
+    Head: integer,
+    Count: integer,
+>
+
+procedure ProsesRR(input: T){
+    
+}
+
+# ALGORITMA
+

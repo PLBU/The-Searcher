@@ -54,9 +54,6 @@ const bacaSemuaFile = async () => {
 	}
 }
 
-
-
-
 async function checkMatriksSiap()
 {
 	if (sudahMasukMatriks == nama2files.length) 
@@ -74,7 +71,6 @@ async function checkMatriksSiap()
 		//var dataDokumen = dariServerJs.dataMatriks
 	}
 }
-
 
 async function readTxt(namaFile)
 {
