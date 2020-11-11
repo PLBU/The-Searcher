@@ -12,6 +12,9 @@ const port = 5000
 //Endpoints Example
 //Variable" global
 
+// Untuk menampung semua nilai rank setiap dokumen yang diolah di fungsi similaritasVektor
+var dataCosine = [];
+
 // Untuk menampung isi document dalam string
 var docString;
 
@@ -69,6 +72,10 @@ async function checkMatriksSiap()
 		//Cara akses dari luar server.js (contoh di main.js), dengan main.js di directory yang sama dengan server.js
 		//var dariServerJs = require('./server.js')
 		//var dataDokumen = dariServerJs.dataMatriks
+
+
+		//    dataCosine = similaritasVektor(arraySearch, dataMatriks);
+		//    console.log(sortRank(dataCosine, dataMatriks));
 	}
 }
 
@@ -144,6 +151,59 @@ function masukTabel(arr, brsMatriks)
 			dataMatriks[brsMatriks][idx] = 1;
 		}
 	}
+}
+
+function similaritasVektor(arraySearch, dataMatriks) {
+    // Menghitung nilai cosinus similaritas terhadap isi kedua array
+    // arraySearch merupakan array inputan searching yang sudah dibuat menjadi vektor
+    var listCosine = new Array(dataMatriks.length);
+    var rootsqrSearch = 0;
+    var rootsqrData = 0;
+
+    for(var i=0; i<dataMatriks.length; i++) {
+        for(var j=0; j<dataMatriks[i].length - 1; j++) {
+            // dataMatriks[i].length - 1, karena untuk dataMatriks[0], isinya merupakan nama dari data matriks di baris tersebut
+            listCosine[i] += arraySearch[j] * dataMatriks[i][j+1];
+            rootsqrSearch += arraySearch[j] ** 2;
+            rootsqrData += dataMatriks[i][j] ** 2;
+        }
+        rootsqrSearch = Math.sqrt(rootsqrSearch);
+        rootsqrData = Math.sqrt(rootsqrData);
+        listCosine[i] /= (rootsqrSearch * rootsqrData)
+    }
+    return listCosine;
+    // listCosine merupakan array dengan setiap baris merupakan nilai rank setiap baris di dataMatriks, sort dilakukan di fungsi sortRank.
+}
+
+function sortRank(listCosine, dataMatriks) {
+    // Sorting nilai rank tertinggi (paling similar) berdasarkan nilai nilai yang ada di listCosine
+    // dataMatriks dibutuhkan untuk menentukan nama dokumen apa yang memiliki suatu nilai rank tersebut 
+    var rank = new array(listCosine.length);
+    var currentHighest = 0;
+    var namaCurrentHighest;
+    for (var i = 0; i < listCosine.length; i++) {
+        rank[i] = new Array(2);
+        // rank merupakan matriks baris listCosine.length, kolom 2. 
+        // kolom pertama rank menyatakan nilai ranking data, kolom kedua menyatakan nama dokumen yang memiliki rank tersebut
+    }
+    for (var i = 0; i < listCosine.length; i++) {
+        currentHighest = 0;
+        for (var j = 0; j < listCosine.length; j++) {
+            // Kondisional dimana list cosine memiliki nilai lebih tinggi dari current highest tapi nilainya lebih kecil dari rank yang sudah dimasukkan sebelumnya
+            if (listCosine[j] > currentHighest && listCosine[j] < rank[i-1][0]){
+                currentHighest = listCosine[j];
+                namaCurrentHighest = dataMatriks[j][0];
+            }
+            // Kondisional dimana ada dua dokumen dengan rank yang nilainya sama
+            if (listCosine[j] == currentHighest && dataMatriks[j] != rank[i-1][1]){
+                currentHighest = listCosine[j];
+                namaCurrentHighest = dataMatriks[j][0];
+            }
+        }
+        rank[i][0] = currentHighest;
+        rank[i][1] = namaCurrentHighest;
+    }
+    return rank;
 }
 
 //Enabling all CORS Requests
