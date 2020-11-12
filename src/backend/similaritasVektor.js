@@ -1,16 +1,25 @@
-function similaritasVektor(arraySearch, dataMatriks) {
-    // Menghitung nilai cosinus similaritas terhadap isi kedua array
-    // arraySearch merupakan array inputan searching yang sudah dibuat menjadi vektor
-    var listCosine = new Array(dataMatriks.length);
+	// Menghitung nilai cosinus similaritas terhadap Query dengan setiap dokumen yang and
+	// inputan:
+	// tabelQuery didapat dari return fungsi makeQueryTable
+	// matriksSearch merupakan matriks dua dimensi 2XN,  inputan searching yang sudah dibuat menjadi vektor
+	
+	// Contoh masukan : similaritasMatriks(makeQueryTable(matriksSearch, dataMatriks));
+	// Contoh keluaran : [0.8273,0.21333,1,0.333];
+	
+    var listCosine = new Array(tabelQuery[0].length - 2);
     var rootsqrSearch = 0;
-    var rootsqrData = 0;
+	var rootsqrData = 0;
+	// matriksSearch = [["dia",2],["adalah",4],["dedlener",100]];
 
-    for(var i=0; i<dataMatriks.length; i++) {
-        for(var j=0; j<dataMatriks[i].length - 1; j++) {
-            // dataMatriks[i].length - 1, karena untuk dataMatriks[0], isinya merupakan nama dari data matriks di baris tersebut
-            listCosine[i] += arraySearch[j] * dataMatriks[i][j+1];
-            rootsqrSearch += arraySearch[j] ** 2;
-            rootsqrData += dataMatriks[i][j] ** 2;
+    for(var i=0; i<tabelQuery[i].length - 2; i++) {
+		rootsqrSearch = 0;
+		rootsqrData = 0;
+		listCosine[i] = 0;
+        for(var j=0; j<tabelQuery.length - 1; j++) {
+            // tabelQuery[i].length - 2, karena untuk tabelQuery[0], isinya merupakan nama dari data matriks di baris tersebut
+            listCosine[i] += tabelQuery[j+1][1] * tabelQuery[j+1][i+2];
+            rootsqrSearch += tabelQuery[j+1][1] ** 2;
+            rootsqrData += tabelQuery[j+1][i+2] ** 2;
         }
         rootsqrSearch = Math.sqrt(rootsqrSearch);
         rootsqrData = Math.sqrt(rootsqrData);

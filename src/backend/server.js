@@ -74,7 +74,7 @@ async function checkMatriksSiap()
 		//var dataDokumen = dariServerJs.dataMatriks
 
 
-		//    dataCosine = similaritasVektor(arraySearch, dataMatriks);
+		//    dataCosine = similaritasVektor(matriksSearch, dataMatriks);
 		//    console.log(sortRank(dataCosine, dataMatriks));
 	}
 }
@@ -153,19 +153,93 @@ function masukTabel(arr, brsMatriks)
 	}
 }
 
-function similaritasVektor(arraySearch, dataMatriks) {
-    // Menghitung nilai cosinus similaritas terhadap isi kedua array
-    // arraySearch merupakan array inputan searching yang sudah dibuat menjadi vektor
-    var listCosine = new Array(dataMatriks.length);
-    var rootsqrSearch = 0;
-    var rootsqrData = 0;
+function queryToArray(str)
+{
+	var kata2query = remove_stopwords(str);
+	var arrayFrekuensi = [];
+	var idx;
+	for (var i = 0; i < kata2query.length; i++) {
+		idx = -1;
+		for (var j = 0; j < arrayFrekuensi.length; j++) {
+			if (arrayFrekuensi[j][0] == kata2query[i])
+			{
+				idx = j;
+			}
+		}
+		if (idx >= 0)
+		{
+			arrayFrekuensi[idx][1] += 1;
+		}
+		else
+		{
+		var kata = [kata2query[i],1];
+		arrayFrekuensi.push(kata);		
+		}
+	}
+	return arrayFrekuensi;
+}
 
-    for(var i=0; i<dataMatriks.length; i++) {
-        for(var j=0; j<dataMatriks[i].length - 1; j++) {
-            // dataMatriks[i].length - 1, karena untuk dataMatriks[0], isinya merupakan nama dari data matriks di baris tersebut
-            listCosine[i] += arraySearch[j] * dataMatriks[i][j+1];
-            rootsqrSearch += arraySearch[j] ** 2;
-            rootsqrData += dataMatriks[i][j] ** 2;
+function makeQueryTable(matriksSearch, dataMatriks) {
+	// Membuat sebuah table query yang akan di representasikan di Front End
+	// inputan:
+	// matriksSearch adalah matriks N X 2, dengan N merupakan jumlah setiap kata berbeda,(sama seperti output queryToArray) akses : matriksSearh[i][0] = "kata1" , matriksSearh[i][1] = frekuensi "kata1"
+	// dataMatriks matriks N X M + 1 , N adalah jumlah dokumen yang dibaca, M adalah vektor berdimensi M
+
+	// Isi tabel*:
+	//	"Term"			"Query"		"D1"	"D2"	"DN"
+	//	"Kata1"			A			X		Y		Z
+	//	"Kata2"			B			P		Q		R
+	//	"Kata3"			C			J		K		L
+
+	var tabelQuery = [];
+	tabelQuery[0][0] = ["Term"];
+	tabelQuery[0][1] = ["Query"];
+	// loop pembuatan jumlah kolom tabelQuery sebanyak dokumen yang dimiliki ("D1,D2,DN")
+	for(var i=0; i<dataMatriks.length - 1; i++) {
+		tabelQuery[0][i+2] = dataMatriks[i+1][0];
+	}
+	// loop pengisian "Term" dan "Query" pada tabel
+    for(var i=0; i<matriksSearch.length; i++) {
+		tabelQuery[i+1][0] = matriksSearch[i][0];
+		tabelQuery[i+1][1] = matriksSearch[i][1];
+	}
+	// loop pengisian "D1" sampai "DN" pada tabel
+	for(var i=0; i<tabelQuery.length - 1; i++) {
+		for(var j=0; j<dataMatriks[0].length - 1; j++) {
+			if (tabelQuery[i+1][0] == dataMatriks[0][j+1]){
+				for(var k=0; k<dataMatriks.length - 1; k++) {				
+					tabelQuery[i+1][k+2] = dataMatriks[k+1][j+1]
+				}
+			}
+		}
+	}
+	return tabelQuery;
+	// *tabelQuery yang di return sama seperti isi tabel yang ditulis diatas.
+}
+
+function similaritasVektor(tabelQuery) {
+	// Menghitung nilai cosinus similaritas terhadap Query dengan setiap dokumen yang and
+	// inputan:
+	// tabelQuery didapat dari return fungsi makeQueryTable
+	// matriksSearch merupakan matriks dua dimensi 2XN,  inputan searching yang sudah dibuat menjadi vektor
+	
+	// Contoh masukan : similaritasMatriks(makeQueryTable(matriksSearch, dataMatriks));
+	// Contoh keluaran : [0.8273,0.21333,1,0.333];
+	
+    var listCosine = new Array(tabelQuery[0].length - 2);
+    var rootsqrSearch = 0;
+	var rootsqrData = 0;
+	// matriksSearch = [["dia",2],["adalah",4],["dedlener",100]];
+
+    for(var i=0; i<tabelQuery[i].length - 2; i++) {
+		rootsqrSearch = 0;
+		rootsqrData = 0;
+		listCosine[i] = 0;
+        for(var j=0; j<tabelQuery.length - 1; j++) {
+            // tabelQuery[i].length - 2, karena untuk tabelQuery[0], isinya merupakan nama dari data matriks di baris tersebut
+            listCosine[i] += tabelQuery[j+1][1] * tabelQuery[j+1][i+2];
+            rootsqrSearch += tabelQuery[j+1][1] ** 2;
+            rootsqrData += tabelQuery[j+1][i+2] ** 2;
         }
         rootsqrSearch = Math.sqrt(rootsqrSearch);
         rootsqrData = Math.sqrt(rootsqrData);
@@ -176,34 +250,52 @@ function similaritasVektor(arraySearch, dataMatriks) {
 }
 
 function sortRank(listCosine, dataMatriks) {
-    // Sorting nilai rank tertinggi (paling similar) berdasarkan nilai nilai yang ada di listCosine
+	// Sorting nilai rank tertinggi (paling similar) berdasarkan nilai nilai yang ada di listCosine
+	// inputan:
+	// listCosine didapat dari return fungsi similaritasMatriks
+	// dataMatriks adalah matriks N X M + 1 , N adalah jumlah dokumen yang dibaca, M adalah vektor berdimensi M
+	// Catatan : Sort bukan berdasar nama, tapi berdasar presentase.
+
+	// Contoh masukan : sortRanking([0.8273,0.21333,1,0.333],dataMatriks);
+
+	// Isi rank*:
+	//	"Nama"			"Presentase"		"Isi"
+	//	"Dokumen3"			96			"apapun isi yang ada didalam dokumen 3 ini, masih ada koma atau simbol lainnya AKA belum di stemming"
+	//	"Dokumen1"			45			"kalau presentase sama, sorting mungkin bisa random untuk kedua dokumen tersebut"
+	//	"Dokumen2"			45			"begitulah."
+	
     // dataMatriks dibutuhkan untuk menentukan nama dokumen apa yang memiliki suatu nilai rank tersebut 
-    var rank = new array(listCosine.length);
+    var rank = [];
     var currentHighest = 0;
-    var namaCurrentHighest;
-    for (var i = 0; i < listCosine.length; i++) {
-        rank[i] = new Array(2);
-        // rank merupakan matriks baris listCosine.length, kolom 2. 
-        // kolom pertama rank menyatakan nilai ranking data, kolom kedua menyatakan nama dokumen yang memiliki rank tersebut
-    }
+	var namaCurrentHighest;
+	rank[0][0] = "Nama";
+	rank[0][1] = "Presentase";
+	rank[0][2] = "Isi";
+
     for (var i = 0; i < listCosine.length; i++) {
         currentHighest = 0;
         for (var j = 0; j < listCosine.length; j++) {
             // Kondisional dimana list cosine memiliki nilai lebih tinggi dari current highest tapi nilainya lebih kecil dari rank yang sudah dimasukkan sebelumnya
             if (listCosine[j] > currentHighest && listCosine[j] < rank[i-1][0]){
                 currentHighest = listCosine[j];
-                namaCurrentHighest = dataMatriks[j][0];
+                namaCurrentHighest = dataMatriks[j+1][0];
             }
             // Kondisional dimana ada dua dokumen dengan rank yang nilainya sama
             if (listCosine[j] == currentHighest && dataMatriks[j] != rank[i-1][1]){
                 currentHighest = listCosine[j];
-                namaCurrentHighest = dataMatriks[j][0];
+                namaCurrentHighest = dataMatriks[j+1][0];
             }
         }
-        rank[i][0] = currentHighest;
-        rank[i][1] = namaCurrentHighest;
+        rank[i][1] = currentHighest * 100;
+		rank[i][0] = namaCurrentHighest;
+
+		var lokasiFile = '../../doc/' + (dataMatriks[j+1][0]);
+		fs.readFile(lokasiFile, function (err, data) {
+			if (err) throw err;
+			rank[i][2] = data.toString();
+		});		
     }
-    return rank;
+	return rank;
 }
 
 //Enabling all CORS Requests
@@ -211,9 +303,10 @@ server.use(cors() )
 
 //Starting the server
 server.listen(port, async () => {
-  	console.log(`Server listening at http://localhost:${port}`)
+	console.log(`Server listening at http://localhost:${port}`)
 	await bacaSemuaFile()
 	await checkMatriksSiap()
+	// console.log(similaritasMatriks(A,B));
 })
 
 //Endpoints test
