@@ -191,9 +191,11 @@ function makeQueryTable(matriksSearch, dataMatriks) {
 	//	"Kata2"			B			P		Q		R
 	//	"Kata3"			C			J		K		L
 
-	var tabelQuery = [];
-	tabelQuery[0][0] = ["Term"];
-	tabelQuery[0][1] = ["Query"];
+	console.log("N: " + matriksSearch.length)
+	console.log("M: " + dataMatriks.length)
+	var tabelQuery = Array.from(Array(matriksSearch.length + 1), () => new Array(dataMatriks.length + 1));
+	tabelQuery[0][0] = "Term";
+	tabelQuery[0][1] = "Query";
 	// loop pembuatan jumlah kolom tabelQuery sebanyak dokumen yang dimiliki ("D1,D2,DN")
 	for(var i=0; i<dataMatriks.length - 1; i++) {
 		tabelQuery[0][i+2] = dataMatriks[i+1][0];
@@ -225,13 +227,13 @@ function similaritasVektor(tabelQuery) {
 	
 	// Contoh masukan : similaritasMatriks(makeQueryTable(matriksSearch, dataMatriks));
 	// Contoh keluaran : [0.8273,0.21333,1,0.333];
-	
+	console.log(tabelQuery[0].length)
     var listCosine = new Array(tabelQuery[0].length - 2);
     var rootsqrSearch = 0;
 	var rootsqrData = 0;
 	// matriksSearch = [["dia",2],["adalah",4],["dedlener",100]];
 
-    for(var i=0; i<tabelQuery[i].length - 2; i++) {
+    for(var i=0; i<tabelQuery[0].length - 2; i++) {
 		rootsqrSearch = 0;
 		rootsqrData = 0;
 		listCosine[i] = 0;
@@ -243,7 +245,8 @@ function similaritasVektor(tabelQuery) {
         }
         rootsqrSearch = Math.sqrt(rootsqrSearch);
         rootsqrData = Math.sqrt(rootsqrData);
-        listCosine[i] /= (rootsqrSearch * rootsqrData)
+		if (rootsqrSearch == 0 || rootsqrData == 0) listCosine[i] = 0
+        else listCosine[i] /= (rootsqrSearch * rootsqrData)
     }
     return listCosine;
     // listCosine merupakan array dengan setiap baris merupakan nilai rank setiap baris di dataMatriks, sort dilakukan di fungsi sortRank.
@@ -268,36 +271,13 @@ function sortRank(listCosine, dataMatriks) {
     var rank = [];
     var currentHighest = 0;
 	var namaCurrentHighest;
-	// rank[0][0] = "Nama";
-	// rank[0][1] = "Presentase";
-	// rank[0][2] = "Isi";
 
     for (var i = 0; i < listCosine.length; i++) {
-		var name;
-		var percentage;
-		var content;
+        const percentage = listCosine[i] * 100;
+		const name = dataMatriks[i+1][0];
 
-        currentHighest = 0;
-        for (var j = 0; j < listCosine.length; j++) {
-            // Kondisional dimana list cosine memiliki nilai lebih tinggi dari current highest tapi nilainya lebih kecil dari rank yang sudah dimasukkan sebelumnya
-            if (listCosine[j] > currentHighest && listCosine[j] < rank[i-1][0]){
-                currentHighest = listCosine[j];
-                namaCurrentHighest = dataMatriks[j+1][0];
-            }
-            // Kondisional dimana ada dua dokumen dengan rank yang nilainya sama
-            if (listCosine[j] == currentHighest && dataMatriks[j] != rank[i-1][1]){
-                currentHighest = listCosine[j];
-                namaCurrentHighest = dataMatriks[j+1][0];
-            }
-        }
-        percentage = currentHighest * 100;
-		name = namaCurrentHighest;
-
-		var lokasiFile = '../../doc/' + (dataMatriks[j+1][0]);
-		fs.readFile(lokasiFile, function (err, data) {
-			if (err) throw err;
-			content = data.toString();
-		});		
+		const lokasiFile = '../../doc/' + (dataMatriks[i+1][0]);
+		const content = fs.readFileSync(lokasiFile,'utf8')
 
 		rank.push({
 			nama: name,
@@ -306,6 +286,7 @@ function sortRank(listCosine, dataMatriks) {
 		})
     }
 
+	rank.sort( (a, b) => b.persentase - a.persentase)
 	return rank;
 }
 
@@ -317,17 +298,6 @@ server.listen(port, async () => {
 	console.log(`Server listening at http://localhost:${port}`)
 	await bacaSemuaFile()
 	await checkMatriksSiap()
-	
-	console.log("The query: " + "integer")
-	var arrQuery = queryToArray("integer")
-	console.log("The arrQuery: " + arrQuery)
-	console.log("The dataMatriks: " + dataMatriks)
-	var queryTable = makeQueryTable(arrQuery, dataMatriks)
-	console.log("The queryTable: " + queryTable)
-	var listCosine = similaritasVektor(queryTable)
-	console.log("The listCosine: " + listCosine)
-	var rank = sortRank(listCosine, dataMatriks)
-	console.log(rank)
 })
 
 //Endpoints test
@@ -357,12 +327,16 @@ server.post('/upload', (req, res) => {
 server.get('/search', (req, res) => {
 	console.log("The query: " + req.query.q)
 	var arrQuery = queryToArray(req.query.q)
-	console.log("The arrQuery: " + arrQuery)
-	console.log("The dataMatriks: " + dataMatriks)
+	console.log("The arrQuery: ")
+	console.log(arrQuery)
+	console.log("The dataMatriks: ")
+	console.log(dataMatriks)
 	var queryTable = makeQueryTable(arrQuery, dataMatriks)
-	console.log("The queryTable: " + queryTable)
+	console.log("The queryTable: ")
+	console.log(queryTable)
 	var listCosine = similaritasVektor(queryTable)
-	console.log("The listCosine: " + listCosine)
+	console.log("The listCosine: ")
+	console.log(listCosine)
 	var rank = sortRank(listCosine, dataMatriks)
 
 	res.send(rank)
