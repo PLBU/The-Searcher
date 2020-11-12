@@ -32,6 +32,16 @@ const Home = () => {
             .catch(e => console.log(e) )
     }
 
+    const search = (event) => {
+        if (event.key === 'Enter') {
+            axios.get(`http://localhost:5000/search?q=${searchQuery}`)
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(e => console.log(e) )
+        }
+    }
+
     React.useEffect( () => {
         getTxt()
     }, [])
@@ -39,6 +49,7 @@ const Home = () => {
     return (
         <div className='flex h-screen justify-center items-center'>
             <animated.input 
+                onKeyDown={search}
                 style={fade}
                 className='border-teal-500 border-4 w-1/2 rounded-full py-5 px-16 bg-white shadow-xl 
                     text-3xl text-gray-600 

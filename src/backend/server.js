@@ -268,11 +268,15 @@ function sortRank(listCosine, dataMatriks) {
     var rank = [];
     var currentHighest = 0;
 	var namaCurrentHighest;
-	rank[0][0] = "Nama";
-	rank[0][1] = "Presentase";
-	rank[0][2] = "Isi";
+	// rank[0][0] = "Nama";
+	// rank[0][1] = "Presentase";
+	// rank[0][2] = "Isi";
 
     for (var i = 0; i < listCosine.length; i++) {
+		var name;
+		var percentage;
+		var content;
+
         currentHighest = 0;
         for (var j = 0; j < listCosine.length; j++) {
             // Kondisional dimana list cosine memiliki nilai lebih tinggi dari current highest tapi nilainya lebih kecil dari rank yang sudah dimasukkan sebelumnya
@@ -286,15 +290,22 @@ function sortRank(listCosine, dataMatriks) {
                 namaCurrentHighest = dataMatriks[j+1][0];
             }
         }
-        rank[i][1] = currentHighest * 100;
-		rank[i][0] = namaCurrentHighest;
+        percentage = currentHighest * 100;
+		name = namaCurrentHighest;
 
 		var lokasiFile = '../../doc/' + (dataMatriks[j+1][0]);
 		fs.readFile(lokasiFile, function (err, data) {
 			if (err) throw err;
-			rank[i][2] = data.toString();
+			content = data.toString();
 		});		
+
+		rank.push({
+			nama: name,
+			persentase: percentage,
+			isi: content
+		})
     }
+
 	return rank;
 }
 
@@ -306,7 +317,17 @@ server.listen(port, async () => {
 	console.log(`Server listening at http://localhost:${port}`)
 	await bacaSemuaFile()
 	await checkMatriksSiap()
-	// console.log(similaritasMatriks(A,B));
+	
+	console.log("The query: " + "integer")
+	var arrQuery = queryToArray("integer")
+	console.log("The arrQuery: " + arrQuery)
+	console.log("The dataMatriks: " + dataMatriks)
+	var queryTable = makeQueryTable(arrQuery, dataMatriks)
+	console.log("The queryTable: " + queryTable)
+	var listCosine = similaritasVektor(queryTable)
+	console.log("The listCosine: " + listCosine)
+	var rank = sortRank(listCosine, dataMatriks)
+	console.log(rank)
 })
 
 //Endpoints test
@@ -314,7 +335,7 @@ server.get('/txt', (req, res) => {
     res.send(dataMatriks)
 })
 
-//To upload file
+//Endpoint 1: To upload file
 server.post('/upload', (req, res) => {
 	try {
 		var form = new formidable.IncomingForm();
@@ -330,4 +351,19 @@ server.post('/upload', (req, res) => {
 	} catch (e) {
 		throw e
 	}
+})
+
+//Endpoint 2: Search
+server.get('/search', (req, res) => {
+	console.log("The query: " + req.query.q)
+	var arrQuery = queryToArray(req.query.q)
+	console.log("The arrQuery: " + arrQuery)
+	console.log("The dataMatriks: " + dataMatriks)
+	var queryTable = makeQueryTable(arrQuery, dataMatriks)
+	console.log("The queryTable: " + queryTable)
+	var listCosine = similaritasVektor(queryTable)
+	console.log("The listCosine: " + listCosine)
+	var rank = sortRank(listCosine, dataMatriks)
+
+	res.send(rank)
 })
