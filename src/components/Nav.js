@@ -19,13 +19,13 @@ const Nav = () => {
             </div>
             <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                 <div className="text-sm lg:flex-grow">
-                    <Link to='/about-us' className="transition transform duration-500 ease-in-out block text-lg mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-teal-500 hover:font-bold mr-5 float-right">
+                    <Link to='/about-us' className="transition transform duration-500 ease-in-out block text-lg mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:scale-110 hover:text-teal-500 hover:font-bold mr-5 float-right">
                         About Us
                     </Link>
-                    <Link to='/how' className="transition transform duration-500 ease-in-out block text-lg mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-teal-500 hover:font-bold mr-5 float-right">
+                    <Link to='/how' className="transition transform duration-500 ease-in-out block text-lg mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:scale-110 hover:text-teal-500 hover:font-bold mr-5 float-right">
                         How to Use
                     </Link>
-                    <Link to='/upload' className="transition transform duration-500 ease-in-out block text-lg mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:text-teal-500 hover:font-bold mr-5 float-right">
+                    <Link to='/upload' className="transition transform duration-500 ease-in-out block text-lg mt-4 lg:inline-block lg:mt-0 text-gray-500 hover:scale-110 hover:text-teal-500 hover:font-bold mr-5 float-right">
                         Upload
                     </Link>
                 </div>

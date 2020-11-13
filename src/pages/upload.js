@@ -52,7 +52,7 @@ const Upload = () => {
                 className={
                     (file) 
                     ? 'mt-10 text-xl bg-teal-500 hover:bg-teal-400 text-white font-bold py-4 px-8 border-b-4 border-teal-700 hover:border-teal-500 rounded-xl' 
-                    : 'mt-10 text-xl bg-teal-500 opacity-50 text-white font-bold py-4 px-8 rounded-xl' }
+                    : 'mt-10 text-xl bg-teal-500 bg-opacity-25 text-white font-bold py-4 px-8 rounded-xl' }
                 onClick={uploadFile}>
                 Upload!
             </animated.button>

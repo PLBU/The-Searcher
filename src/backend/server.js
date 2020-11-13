@@ -116,18 +116,18 @@ function afterReadTxt(namaFile)
 }
 
 function remove_stopwords(str) {
-	//remove stopwrod dan stemming
-    var result = [];
-    var words = str.split(' ');
-    for(var i=0;i<words.length;i++) {
-       var word_clean = words[i].split(",").join(".").split("!").join(".").split(".").join("")
-       var word_clean2 = lancasterStemmer(word_clean)
-       if(!stopwords.includes(word_clean)) {
-           result.push(word_clean2)
-       }
-    }
-    return(result)
-}  
+//remove stopwrod dan stemming
+	var result = [];
+	var words = str.split(' ');
+	for(var i=0;i<words.length;i++) {
+		var word_clean = words[i].split("\n").join(".").split(",").join(".").split("!").join(".").split(".").join("")
+		var word_clean2 = lancasterStemmer(word_clean)
+		if(!stopwords.includes(word_clean)) {
+			result.push(word_clean2)
+		}
+	}
+	return(result)
+}
 
 function masukTabel(arr, brsMatriks)
 {
@@ -179,6 +179,47 @@ function queryToArray(str)
 	return arrayFrekuensi;
 }
 
+function makeRealQueryTable(matriksSearch, dataMatriks) {
+	var queryTable = [...dataMatriks]
+
+	matriksSearch.forEach(elementArr => {
+		var found = false
+		for (var i = 1; i < queryTable[0].length; i++){
+			if (elementArr[0] == queryTable[0][i] ) found = true
+		}
+
+		if (!found) {
+			queryTable[0].push(elementArr[0] )
+			for (var i = 1; i < queryTable.length; i++) queryTable[i].push(0)
+		}
+	})
+
+	var rowQuery = ['Query']
+	for (var i = 1; i < queryTable[0].length; i++){
+		var found = false
+		for (var j = 0; j < matriksSearch.length && !found; j++){
+			if (queryTable[0][i] == matriksSearch[j][0] ) {
+				found = true
+				rowQuery.push(matriksSearch[j][1] )
+			}
+		}
+
+		if(!found) rowQuery.push(0)
+	}
+
+	queryTable.splice(1, 0, rowQuery)
+	// console.log("THIS IS THE QUERY TABLE: ")
+	// console.log(queryTable)
+
+	queryTable = queryTable[0].map((_, colIndex) => queryTable.map(row => row[colIndex]));
+	// console.log("THIS IS THE NEW QUERY TABLE: ")
+	// console.log(queryTable)
+
+	queryTable[0][0] = 'Term'
+
+	return queryTable
+}
+
 function makeQueryTable(matriksSearch, dataMatriks) {
 	// Membuat sebuah table query yang akan di representasikan di Front End
 	// inputan:
@@ -215,6 +256,7 @@ function makeQueryTable(matriksSearch, dataMatriks) {
 			}
 		}
 	}
+
 	return tabelQuery;
 	// *tabelQuery yang di return sama seperti isi tabel yang ditulis diatas.
 }
@@ -243,8 +285,15 @@ function similaritasVektor(tabelQuery) {
             rootsqrSearch += tabelQuery[j+1][1] ** 2;
             rootsqrData += tabelQuery[j+1][i+2] ** 2;
         }
+		console.log('PERHITUNGAN')
+		console.log(listCosine[i] )
+		console.log(rootsqrData)
+		console.log(rootsqrSearch)
         rootsqrSearch = Math.sqrt(rootsqrSearch);
         rootsqrData = Math.sqrt(rootsqrData);
+		console.log('AKAR2')
+		console.log(rootsqrData)
+		console.log(rootsqrSearch)
 		if (rootsqrSearch == 0 || rootsqrData == 0) listCosine[i] = 0
         else listCosine[i] /= (rootsqrSearch * rootsqrData)
     }
@@ -272,6 +321,9 @@ function sortRank(listCosine, dataMatriks) {
     var currentHighest = 0;
 	var namaCurrentHighest;
 
+	console.log("The dataMatriks now: ")
+	console.log(dataMatriks)
+
     for (var i = 0; i < listCosine.length; i++) {
         const percentage = listCosine[i] * 100;
 		const name = dataMatriks[i+1][0];
@@ -281,7 +333,7 @@ function sortRank(listCosine, dataMatriks) {
 
 		rank.push({
 			nama: name,
-			persentase: percentage,
+			persentase: percentage.toFixed(2),
 			isi: content
 		})
     }
@@ -331,7 +383,8 @@ server.get('/search', (req, res) => {
 	console.log(arrQuery)
 	console.log("The dataMatriks: ")
 	console.log(dataMatriks)
-	var queryTable = makeQueryTable(arrQuery, dataMatriks)
+	var queryTable = makeRealQueryTable(arrQuery, dataMatriks)
+	var queryTableShown = makeQueryTable(arrQuery, dataMatriks)
 	console.log("The queryTable: ")
 	console.log(queryTable)
 	var listCosine = similaritasVektor(queryTable)
@@ -339,5 +392,8 @@ server.get('/search', (req, res) => {
 	console.log(listCosine)
 	var rank = sortRank(listCosine, dataMatriks)
 
-	res.send(rank)
+	res.send({
+		searchResult: rank,
+		table: queryTableShown
+	})
 })
