@@ -1,0 +1,29 @@
+Robots to take on more supermarket tasks
+
+The next time you pack your bags at the supermarket checkout, give yourself a small pat on the back.
+
+A task which is so simple for humans - quickly and efficiently packing a bag of groceries of different sizes and shapes without crushing anything - is something that until recently has been beyond the abilities of robots.
+
+It requires vision systems to locate the produce, a flexible and strong hand to grab items and a sophisticated artificial intelligence which knows that a carton of eggs should not be stacked under a four-pint bottle of milk.
+
+It is a problem that James Matthews, the chief executive of Ocado Technology (part of the Ocado Group) is wrestling with in the warehouses that handle online orders.
+
+The company has a sophisticated warehouse in Erith in east London, which is already highly automated.
+
+Hundreds of robots zip around a grid, collecting groceries and bringing them to a member of staff who will pack them into boxes, which are then loaded on to trucks for delivery.
+
+"We're typically picking say 50 different items of different shapes and sizes, and how dense we pack them is absolutely critical to the economics of our business.
+
+"If we put one thing per box on the road, then we're going to use a lot of vans very inefficiently."
+
+Ocado sell its system to supermarkets all over the world, but those customers are demanding ever greater efficiency, so training robots to pack the bags would make economic sense.
+
+The company had already been working with five robotic arms at the Erith warehouse,
+
+"It's a very challenging space. It's not one where you can plot a very direct path to a solution there. Some of this stuff is still warm from academia," says Mr Matthews.
+
+But now the process is accelerating with two big acquisitions. Ocado is paying $262m (£198m) for Kindred Systems, a San Francisco-based firm that makes a robotic sorting systems.
+
+In addition, it is buying Las Vegas-based Haddington Dynamics for $25m (£19m) which makes lighter-weight, and highly sensitive robotic arms.
+
+Kindred's sorting system is already used to pick products in clothing warehouses, including some owned by Gap.

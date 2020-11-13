@@ -1,0 +1,64 @@
+Google Photos abandons unlimited uploads amid storage changes
+
+Google Photos will no longer offer unlimited free photo storage, in a move that will affect storage for other Google products including email.
+
+The company's photo storage launched in 2015, promising unlimited uploads.
+
+But Google now says it will limit that to the same 15GB of storage per account that is shared by its popular apps like Gmail and Google Drive.
+
+Anyone wishing to store more than that will have to pay for one of the company's storage plans.
+
+The change could mean that users who continue to upload many photos will run out of space for emails faster.
+
+But photos uploaded before June 2021, when the change happens, will not count towards users' limits.
+
+Disgruntled users on social media accused Google of using the free photo storage as a ploy to acquire market share from other firms while losing money.
+
+Don MacAskill, chief executive of photo sharing site Flickr and its owner Smug Mug, tweeted: "For five years, we've known this would happen eventually... Losing billions of dollars to scoop up market share, stifle the competition, then eventually charging money for it? Monopolistic behaviour."
+
+He added that he was not surprised Google had acted now since the US Department of Justice had recently filed anti-trust charges against the firm.
+
+The latest announcement coincides with 165 of Google's critics writing to the European Union, asking the bloc to take a tougher stance against what they say are unfair practices by the tech giant.
+
+Unsustainable growth
+"When we say a lifetime of memories, we really mean it," Google said when it launched the Photos service in 2015.
+
+"With Google Photos, you can now back up and store unlimited high-quality photos and videos for free."
+
+But in a blog on Wednesday, it said that policy had led to four trillion photos being stored on the service, with 28 billion photos and videos being uploaded every week.
+
+It said the change was needed to make sure the product "continues to meet your needs over the long haul".
+
+
+A similar post about the wider ecosystem revealed that 4.3 million gigabytes were added to Gmail, Drive, and Photos combined every single day.
+
+The unlimited photo storage on offer was a major selling point in the marketing for Google's own Pixel phones, which gave users free unlimited storage at full resolution. Non-Pixel owners were only offered unlimited uploads at what Google calls "high quality" - a lower-resolution compressed standard.
+
+Google Photos stops back-up of social media images
+Facebook to let users upload all photos to Google
+Both have been downgraded under the new rules, with the compromise from Google being that Pixel owners can continue to have unlimited uploads - but now at the lower quality that was free to everyone before. Some Pixel devices will retain their original quality free uploads for longer.
+
+Google also said that users who were over their storage limit for two years might have their content deleted from Gmail, Drive, and Photos.
+
+Three years of free storage
+The issue of vast amounts of cloud storage becoming unsustainable is not new.
+
+Flickr, which was once owned by Yahoo, offered one terabyte (1,000GB) of free storage until late 2018, when it announced that users could only host 1,000 photographs for free.
+
+Announcing the change, it said that "storing tens of billions of Flickr members' photos is staggeringly expensive". In early 2019, it began deleting users' photos to make space.
+
+A spokesperson for photography site 500px, meanwhile, said they hoped the change would help photographers "recognise the value of being part of a large community, full of people with like-minded interests - versus a place just to let their photos sit and collect dust".
+
+Google says its free 15GB of storage that comes with every account is enough to last most users "several years" across Gmail, Drive, and Photos.
+
+It says that once the change comes in, more than 80% of users will be able to store roughly three years of photos before hitting the limit.
+
+More storage is available through its Google One plans for a price, which in the UK costs £7.99 per month for two terabytes (2,000GB).
+
+Dennis Hahn, a data centre storage analyst at technology research firm Omdia, said this change could be a sign of companies battling to meet our demand for cloud storage.
+
+"Google, Facebook and Amazon have been gobbling up massive amounts of storage in the past few years," he said.
+
+Much of that is on 16-terabyte drives, which can hold a few million photos each - and adds up quickly for the billions of home photos Google is holding.
+
+"While data storage capacity is being currently deployed at record - and probably unfathomable - levels from five years ago, the unrelenting accumulation of massive amounts of data appears to be overwhelming our efforts to store it as easily as we once thought," he said.

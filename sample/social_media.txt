@@ -1,0 +1,45 @@
+Social media: How might it be regulated?
+
+Several countries around the world are considering regulating social media - but what might that look like?
+
+A new report has put forward a tranche of ideas that its authors say could end the "informational chaos that poses a vital threat to democracies".
+
+One of its suggestions is that social networks should be required to release details of their algorithms and core functions to trusted researchers, in order for the technology to be vetted.
+
+It also suggests adding "friction" to online sharing, to prevent the rampant spread of disinformation.
+
+The report was published by the Forum for Information and Democracy, which was established to make non-binding recommendations to 38 countries. They include Australia, Canada, France, Germany, India, South Korea and the UK.
+
+Among those contributing to the report were Cambridge Analytica whistleblower Christopher Wylie, and former Facebook investor Roger McNamee - a long-time critic of the social network.
+
+Free expression group Article 19 and digital rights groups including the Electronic Frontier Foundation were also consulted.
+
+What does the report suggest?
+One of the core recommendations is the creation of a "statutory building code", which describes mandatory safety and quality requirements for digital platforms.
+
+"If I were to produce a kitchen appliance, I have to do more safety testing and go through more compliance procedures to create a toaster than to create Facebook," Mr Wylie told the BBC.
+
+He said social networks should be required to weigh up all the potential harms that could be caused by their design and engineering decisions.
+
+Christopher Wylie
+image captionChristopher Wylie revealed how Cambridge Analytica used millions of people's Facebook data for targeted campaigns
+The report also suggests social networks should display a correction to every single person who was exposed to misinformation, if independent fact-checkers identify a story as false.
+
+Other suggestions include:
+
+implementing "circuit breakers" so that newly viral content is temporarily stopped from spreading while it is fact-checked
+forcing social networks to disclose in the news feed why content has been recommended to a user
+limiting the use of micro-targeting advertising messages
+making it illegal to exclude people from content on the basis of race or religion, such as hiding a spare room advert from people of colour
+banning the use of so-called dark patterns - user interfaces designed to confuse or frustrate the user, such as making it hard to delete your account
+It also included some proposals that Facebook, Twitter and YouTube already do voluntarily, such as:
+
+labelling the accounts of state-controlled news organisations
+limiting how many times messages can be forwarded to large groups, as Facebook does on WhatsApp
+The three businesses were sent a copy of the report on Wednesday and the BBC invited them to comment.
+
+Twitter's head of public policy strategy, Nick Pickles, said: "Twitter is committed to building a safer internet and improving the health of the public conversation. We support a forward-looking approach to regulation that protects the Open Internet, freedom of expression and fair competition in the internet sector.
+
+"Openness and transparency is central to Twitter's approach, as embodied by our public API, our information operations archive, our commitment to user choice, our decision to ban political advertising and label content to provide more context and information, and our disclosures in the Twitter Transparency Report.
+
+"However, technology companies are not all the same, and nor is technology the only part of the media ecosystem. It is essential to ensure a whole of society response to tackle these important issues."

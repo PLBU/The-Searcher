@@ -1,0 +1,36 @@
+Alexa to start second-guessing what users want
+
+Amazon's home voice assistant Alexa is taking a step closer towards natural conversation by trying to guess what users might say next.
+
+So if asked how long it took to brew a cup of tea, it may answer and then ask if the user wants it to set a timer.
+
+The AI-powered chat service is streamed in millions of homes, via Amazon's Echo speakers.
+
+And some may find its new-found skill annoying, according to one expert.
+
+Alexa software engineers Anjishnu Kumar and Anand Rathi blogged: "With a new machine learning system, Alexa can infer that an initial question implies a subsequent request."
+
+But this required "a number of sophisticated algorithms to detect latent goals, formulate them into actions that frequently span different skills and surface to to customers in a way doesn't feel disruptive".
+
+Gadget website Pocket-lint founder Stuart Miles said if it worked well, it would be a great time-saver.
+
+But that would depend on how much Alexa understood about the context of a question.
+
+"If you ask it what the capital of Mongolia is in the context of geography homework and its next question is, 'Do you want to book tickets online?', then that is going to be annoying.
+
+"And you are just going to turn it off."
+
+'Spam' assistant
+Some users apparently given the feature early have already posted complaints to Reddit.
+
+"It's just a constant barrage of asking me if I want to use some other feature that I do not want to use," wrote one user, likening the facility to "spam".
+
+Mr Miles said intelligent conversation needed to work both ways.
+
+"One of most asked questions of Alexa is 'Turn on the lights', even by people who don't have smart lights connected to Alexa," he said.
+
+"They think, 'Alexa is clever, so why can't it turn on my lights?'
+
+"People expect these voice assistants to become more intelligent.
+
+"But they still have to learn."
