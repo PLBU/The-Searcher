@@ -2,8 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import * as ReactSpring from 'react-spring'
 import { animated } from 'react-spring'
-import { Modal } from 'react-modal-overlay'
-import "react-modal-overlay/dist/index.css";
+import Modal from 'react-modal'
 
 // Import styling
 import '../css/main.css'
@@ -34,14 +33,14 @@ const Home = () => {
     const [textContent, setTextContent] = React.useState(null)
 
     // Functions
-
     const search = (event) => {
         if (event.key === 'Enter') {
             axios.get(`http://localhost:5000/search?q=${searchQuery}`)
                 .then(res => {
                     console.log(res.data)
                     setSearchRes(res.data.searchResult)
-                    setTable(res.data.table)
+                    var tableNow = res.data.table[0].map((_, colIndex) => res.data.table.map(row => row[colIndex] ) )
+                    setTable(tableNow)
                 })
                 .catch(e => console.log(e) )
         }
@@ -59,10 +58,22 @@ const Home = () => {
     return (
         <div className='flex flex-col h-screen justify-center items-center'>
             {/* Modal isi dokumen */}
-            <Modal show={showModal} 
-                closeModal={() => setShowModal(false)}>
+            <Modal
+                style={{
+                    overlay: {
+                        zIndex: 30,
+                        backgroundColor: 'rgba(0, 0, 0, 0.75)'
+                    },
+                    content: {
+                        borderRadius: '24px',
+                    }
+                }}
+                onRequestClose={() => setShowModal(false)}
+                isOpen={showModal}>
+                <button className='absolute right-0 mr-8 font-bold text-3xl text-teal-500' 
+                    onClick={() => setShowModal(false)}>X</button>
                 <p className='font-bold text-3xl '>{textTitle}</p>
-                <p className='font-bold text-lg '>{textContent}</p>
+                <p className='font-bold text-base text-gray-700 '>{textContent}</p>
             </Modal>
             <animated.input 
                 onKeyDown={search}
@@ -76,7 +87,7 @@ const Home = () => {
                 onChange={event => setSearchQuery(event.target.value)}
                 placeholder={"Search something here and hit enter"}
                 type="text"/>
-            <div className='flex flex-col h-screen justify-center items-center mt-48'>
+            <div className='flex flex-col h-screen items-center mt-48'>
                 <div className='grid gap-4 grid-cols-3'>
                 { searchRes && searchQuery.length
                     ? searchRes.map( (value, index) => 
@@ -85,7 +96,7 @@ const Home = () => {
                             className='max-w-sm rounded-3xl overflow-hidden shadow-lg p-10 bg-white m-5 border-2 border-opacity-25 border-teal-500 
                             cursor-pointer hover:scale-110 transition duration-500 ease-in-out transform'>
                             <p className='font-bold text-xl'>{value.nama}</p>
-                            <p>Similarity: {value.persentase.toFixed(2) }%</p>
+                            <p>Similarity: {value.persentase.toFixed(2)}%</p>
                             <p>Content: {shorten(value.isi, 20)}</p>
                         </div>
                     )
@@ -94,11 +105,11 @@ const Home = () => {
                 </div>
                 {table && searchQuery.length
                     ?
-                    <table className='table-auto my-10 z-10 shadow-lg'>
+                    <table className='table-auto my-10 shadow-lg'>
                         <tbody>
-                            {table.map( (subarray, index) => 
+                            {table.map( (subarray) => 
                             <tr>
-                                {subarray.map(element => 
+                                {subarray.map( (element, index) => 
                                     <td className={
                                         (index === 0)
                                         ? 'bg-teal-500 bg-opacity-25 border border-teal-500 px-4 py-2'

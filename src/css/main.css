@@ -203,7 +203,12 @@ button,
 
 /**
  * Remove the inner border and padding in Firefox.
- */
+ */ 
+
+::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
 
 button::-moz-focus-inner,
 [type="button"]::-moz-focus-inner,
