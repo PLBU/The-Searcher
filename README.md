@@ -2,10 +2,13 @@
 ![Current Version](https://img.shields.io/badge/version-v1.0.0-blue)
 > This project is built for university assignment, it's a search engine for personal documents on website platform
 
-## Created by:
-* [@RenaldiArlin](https://github.com/PLBU/) - 13519114
-* [@FarrelAbiezaZidan](https://github.com/FarraArbitera) - 13519182
-* [@LeonardusJamesWang](https://github.com/jamesclaws) - 13519189
+## Table of Contents
+* [Screenshots](#screenshots)
+* [Features](#features)
+* [Technologies used](#technologies-used)
+* [Prerequisites](#prerequisites)
+* [Running the App](#running-the-app)
+* [Created by](#created-by)
 
 ## Screenshots
 ![Example screenshot](./src/images/ss-1.png)
@@ -40,3 +43,8 @@
   ```
     npm start
   ```
+
+## Created by:
+* [@RenaldiArlin](https://github.com/PLBU/) - 13519114
+* [@FarrelAbiezaZidan](https://github.com/FarraArbitera) - 13519182
+* [@LeonardusJamesWang](https://github.com/jamesclaws) - 13519189
