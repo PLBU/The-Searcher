@@ -32,7 +32,7 @@ const Upload = () => {
 
         axios.post('http://localhost:5000/upload', formData)
             .then(res => {
-                alert("File successfully uploaded in ./doc")
+                alert("File successfully uploaded in ./test")
                 console.log(res.data) 
             })
             .catch(e =>{

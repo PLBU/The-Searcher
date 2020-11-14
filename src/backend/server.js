@@ -49,7 +49,7 @@ const bacaSemuaFile = async () => {
 	// *File dibaca di proses di waktu yang berbeda-beda, urutan dokumen dataMatriks tidak sesuai urutan nama2files*
 	dataMatriks = [["Nama"]];
 	nama2files = [];
-	fs.readdirSync('../../doc/').forEach(file => {
+	fs.readdirSync('../../test/').forEach(file => {
 		nama2files.push(file);
 	});
 	for (var i = 0; i < nama2files.length; i++) {
@@ -84,7 +84,7 @@ async function readTxt(namaFile)
 	// Terima nama file, cari di folder doc, lalu simpan di docstring,
 	// remove stopword dan stemming, simpan di docArray
 	// Lalu proses di afterReadTxt (karena asyncronous function)
-	var lokasiFile = '../../doc/' + namaFile;
+	var lokasiFile = '../../test/' + namaFile;
 	fs.readFile(lokasiFile, function (err, data) {
 	    if (err) throw err;
 	    docString = data.toString();
@@ -97,7 +97,7 @@ async function readTxt(namaFile)
 
 function afterReadTxt(namaFile)
 {
-	//Doc array sudah berisi kata" hasil stemming
+	//test array sudah berisi kata" hasil stemming
 
 	//brsMatriks adalah index baris dimana file ini disimpan
 	var brsMatriks = dataMatriks.length;
@@ -326,7 +326,7 @@ function sortRank(listCosine, dataMatriks) {
         const percentage = listCosine[i] * 100;
 		const name = dataMatriks[i+1][0];
 
-		const lokasiFile = '../../doc/' + (dataMatriks[i+1][0]);
+		const lokasiFile = '../../test/' + (dataMatriks[i+1][0]);
 		const content = fs.readFileSync(lokasiFile,'utf8')
 
 		rank.push({
@@ -361,7 +361,7 @@ server.post('/upload', (req, res) => {
 		var form = new formidable.IncomingForm();
 		form.parse(req, function (err, fields, files) {
 			var oldpath = files.filetoupload.path;
-			var newpath = '../../doc/' + files.filetoupload.name;
+			var newpath = '../../test/' + files.filetoupload.name;
 			fs.rename(oldpath, newpath, function (err) {
 				if (err) throw err
 				bacaSemuaFile()

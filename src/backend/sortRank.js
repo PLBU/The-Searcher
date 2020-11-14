@@ -38,7 +38,7 @@ function sortRank(listCosine, dataMatriks) {
         rank[i][1] = currentHighest * 100;
 		rank[i][0] = namaCurrentHighest;
 
-		var lokasiFile = '../../doc/' + (dataMatriks[j+1][0]);
+		var lokasiFile = '../../test/' + (dataMatriks[j+1][0]);
 		fs.readFile(lokasiFile, function (err, data) {
 			if (err) throw err;
 			rank[i][2] = data.toString();
