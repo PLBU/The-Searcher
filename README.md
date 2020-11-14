@@ -1,11 +1,24 @@
 # The Seacher
-![Current Version](https://img.shields.io/badge/version-v0.4.0-blue)
+![Current Version](https://img.shields.io/badge/version-v1.0.0-blue)
 > This project is built for university assignment, it's a search engine for personal documents on website platform
 
 ## Created by:
 * [@RenaldiArlin](https://github.com/PLBU/) - 13519114
 * [@FarrelAbiezaZidan](https://github.com/FarraArbitera) - 13519182
 * [@LeonardusJamesWang](https://github.com/jamesclaws) - 13519189
+
+## Screenshots
+![Example screenshot](.src//images/ss-1.png)
+![Example screenshot](.src//images/ss-2.png)
+![Example screenshot](.src//images/ss-3.png)
+![Example screenshot](.src//images/ss-4.png)
+![Example screenshot](.src//images/ss-5.png)
+![Example screenshot](.src//images/ss-6.png)
+
+## Features
+* Upload your file as the searching material
+* Search .txt files in the doc directory
+* See the similarity percentage
 
 ## Technologies Used
 * React.js
@@ -27,12 +40,3 @@
   ```
     npm start
   ```
-
-## To Do List Frontend
-- [x] Buat Navigation Structure
-- [x] Buat desain kasar Frontend
-- [x] Isi About Us
-- [x] Isi How to Use
-- [x] Buat Search Bar
-- [ ] State2 sesuain backend / Logic Frontend
-- [x] Mulai styling, kemungkinan Tailwind.css ato React Bootstrap

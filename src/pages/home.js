@@ -85,7 +85,7 @@ const Home = () => {
                             className='max-w-sm rounded-3xl overflow-hidden shadow-lg p-10 bg-white m-5 border-2 border-opacity-25 border-teal-500 
                             cursor-pointer hover:scale-110 transition duration-500 ease-in-out transform'>
                             <p className='font-bold text-xl'>{value.nama}</p>
-                            <p>Similarity: {value.persentase}%</p>
+                            <p>Similarity: {value.persentase.toFixed(2) }%</p>
                             <p>Content: {shorten(value.isi, 20)}</p>
                         </div>
                     )

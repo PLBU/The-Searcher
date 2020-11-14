@@ -318,8 +318,6 @@ function sortRank(listCosine, dataMatriks) {
 	
     // dataMatriks dibutuhkan untuk menentukan nama dokumen apa yang memiliki suatu nilai rank tersebut 
     var rank = [];
-    var currentHighest = 0;
-	var namaCurrentHighest;
 
 	console.log("The dataMatriks now: ")
 	console.log(dataMatriks)
@@ -333,7 +331,7 @@ function sortRank(listCosine, dataMatriks) {
 
 		rank.push({
 			nama: name,
-			persentase: percentage.toFixed(2),
+			persentase: percentage,
 			isi: content
 		})
     }
