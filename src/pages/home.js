@@ -97,6 +97,7 @@ const Home = () => {
                             cursor-pointer hover:scale-110 transition duration-500 ease-in-out transform'>
                             <p className='font-bold text-xl'>{value.nama}</p>
                             <p>Similarity: {value.persentase.toFixed(2)}%</p>
+                            <p>Word Count: {value.wordCount}</p>
                             <p>Content: {shorten(value.isi, 20)}</p>
                         </div>
                     )
@@ -107,11 +108,13 @@ const Home = () => {
                     ?
                     <table className='table-auto my-10 shadow-lg'>
                         <tbody>
-                            {table.map( (subarray) => 
+                            {table.map( (subarray, idx) => 
                             <tr>
                                 {subarray.map( (element, index) => 
                                     <td className={
-                                        (index === 0)
+                                        (idx === 0)
+                                        ? 'bg-teal-600 bg-opacity-50 border border-teal-600 px-4 py-2'
+                                        : (index === 0)
                                         ? 'bg-teal-500 bg-opacity-25 border border-teal-500 px-4 py-2'
                                         : 'bg-white border border-teal-500 px-4 py-2'}>{element}</td>)}
                             </tr>

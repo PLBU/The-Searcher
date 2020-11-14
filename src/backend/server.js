@@ -316,7 +316,11 @@ function sortRank(listCosine, dataMatriks) {
 	//	"Dokumen1"			45			"kalau presentase sama, sorting mungkin bisa random untuk kedua dokumen tersebut"
 	//	"Dokumen2"			45			"begitulah."
 	
-    // dataMatriks dibutuhkan untuk menentukan nama dokumen apa yang memiliki suatu nilai rank tersebut 
+    // dataMatriks dibutuhkan untuk menentukan nama dokumen apa yang memiliki suatu nilai rank tersebut
+	function countWords(str) {
+		return str.trim().split(/\s+/).length;
+	} 
+
     var rank = [];
 
 	console.log("The dataMatriks now: ")
@@ -332,7 +336,8 @@ function sortRank(listCosine, dataMatriks) {
 		rank.push({
 			nama: name,
 			persentase: percentage,
-			isi: content
+			isi: content,
+			wordCount: countWords(content)
 		})
     }
 
