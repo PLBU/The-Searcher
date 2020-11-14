@@ -8,12 +8,12 @@
 * [@LeonardusJamesWang](https://github.com/jamesclaws) - 13519189
 
 ## Screenshots
-![Example screenshot](.src//images/ss-1.png)
-![Example screenshot](.src//images/ss-2.png)
-![Example screenshot](.src//images/ss-3.png)
-![Example screenshot](.src//images/ss-4.png)
-![Example screenshot](.src//images/ss-5.png)
-![Example screenshot](.src//images/ss-6.png)
+![Example screenshot](.src/images/ss-1.png)
+![Example screenshot](.src/images/ss-2.png)
+![Example screenshot](.src/images/ss-3.png)
+![Example screenshot](.src/images/ss-4.png)
+![Example screenshot](.src/images/ss-5.png)
+![Example screenshot](.src/images/ss-6.png)
 
 ## Features
 * Upload your file as the searching material
