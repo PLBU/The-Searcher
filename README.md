@@ -29,6 +29,7 @@
 * Express
 * Cors
 * Axios
+* Tailwind.css
 * And other libraries
 
 ## Prerequisites
